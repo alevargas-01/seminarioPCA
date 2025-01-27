@@ -1,7 +1,0 @@
-{
-  "name": "seminarioPca",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}
