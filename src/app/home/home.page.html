@@ -1,37 +1,46 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
+    <ion-buttons>
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Mi aplicación</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let post of posts">
-        <ion-card class="ion-padding">
-          <img [src]="post.image" class="image-post" alt="img usuario" />
-          <ion-card-header>
-            <ion-card-subtitle>
-              <ion-avatar class="user-avatar">
-                <img [src]="post.user.image ? post.user.image : 'assets/imagenes/template_img.jpg'" alt="img usuario" />
-              </ion-avatar>
-              {{ post.user.name }}
-            </ion-card-subtitle>
-          </ion-card-header>
-          <ion-card-content>
-            {{ post.description }}
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="content-container">
+  <ion-list>
+    <ion-progress-bar type="indeterminate" color="primary" *ngIf="isLoading" ></ion-progress-bar>
+    <ion-card *ngFor="let post of posts" class="post-card">
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <img src="{{post.image}}" alt="Post Image" class="post-image">
+
+      <ion-card-header class="post-header">
+        <div class="user-info">
+          <ion-avatar class="user-avatar">
+            <img [src]="post?.user?.image ?? 'assets/img/user.jpg'" alt="User Avatar" />
+          </ion-avatar>
+          <span class="user-name">{{post.user.name}}</span>
+        </div>
+      </ion-card-header>
+
+      <ion-card-content class="post-content">
+        <p class="post-description">{{post.description}}</p>
+      </ion-card-content>
+
+    </ion-card>
+  </ion-list>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadPost($event)" *ngIf="hasMore">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more posts..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
     <ion-fab-button (click)="addPost()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
+
 </ion-content>
+
+
+
+

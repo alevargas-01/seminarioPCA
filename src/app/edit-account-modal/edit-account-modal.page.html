@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Actualizar Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()">
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="editFormAccount" (ngSubmit)="EditAccount(editFormAccount.value)" class="form-container">
+    <!-- Circular Image Upload -->
+    <div class="image-upload" (click)="presentPhotoOptions()">
+      <ion-avatar class="profile-avatar">
+        <img [src]="accuont_image ?? 'assets/img/no-image.avif'" alt="Profile Image" />
+      </ion-avatar>
+      <p class="upload-text">Toque para cambiar la imagen</p>
+    </div>
+
+    <!-- Name Field -->
+    <ion-item class="form-item" lines="full">
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input formControlName="name" [(ngModel)]="user.name"></ion-input>
+    </ion-item>
+
+    <div class="error-messages">
+      <ng-container *ngFor="let error of formErrors.name">
+        <ion-text color="danger" *ngIf="editFormAccount.get('name')?.hasError(error.type) && editFormAccount.get('name')?.dirty">
+          {{ error.message }}
+        </ion-text>
+      </ng-container>
+    </div>
+
+    <!-- Lastname Field -->
+    <ion-item class="form-item" lines="full">
+      <ion-label position="stacked">Apellido</ion-label>
+      <ion-input formControlName="last_name" [(ngModel)]="user.last_name"></ion-input>
+    </ion-item>
+
+    <div class="error-messages">
+      <ng-container *ngFor="let error of formErrors.last_name">
+        <ion-text color="danger" *ngIf="editFormAccount.get('last_name')?.hasError(error.type) && editFormAccount.get('last_name')?.dirty">
+          {{ error.message }}
+        </ion-text>
+      </ng-container>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="button-container">
+      <ion-button color="primary" type="submit" expand="block" fill="solid" class="submit-button">
+        Guardar Cambios
+      </ion-button>
+    </div>
+  </form>
+</ion-content>

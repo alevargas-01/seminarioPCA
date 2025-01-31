@@ -1,0 +1,90 @@
+/* Header Styles */
+ion-toolbar {
+  --background: #2a80e4; /* Primary color */
+}
+
+.header-title {
+  color: white;
+  font-weight: bold;
+}
+
+.close-button {
+  --padding-start: 0;
+}
+
+.close-icon {
+  color: white;
+}
+
+/* Image Upload Section */
+.image-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  padding: 20px;
+  transition: background-color 0.2s;
+}
+
+.image-upload:hover {
+  background-color: #e1e1e1;
+}
+
+.image-placeholder {
+  text-align: center;
+  color: #bbb;
+}
+
+.upload-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.upload-text {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.post-image {
+  width: 100%;
+  border-radius: 8px;
+  max-width: 100%;
+  object-fit: cover;
+}
+
+/* Description Field */
+.description-item {
+  margin-bottom: 20px;
+}
+
+.description-label {
+  font-size: 14px;
+  color: #555;
+}
+
+.description-textarea {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Error Messages */
+.error-messages {
+  margin-top: 10px;
+}
+
+/* Submit Button */
+.submit-button {
+  --background: #2a80e4;
+  --border-radius: 10px;
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+}
+
+.form-footer {
+  margin-top: 20px;
+}

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="header-title">Crear Post</ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="closeModal()" class="close-button">
+        <ion-icon slot="icon-only" name="close-outline" class="close-icon"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="addPostForm" (ngSubmit)="addPost(addPostForm.value)" class="form-container">
+
+    <!-- Image Upload Section -->
+    <div class="image-upload" (click)="uploadPhoto()">
+      <div class="image-placeholder" *ngIf="!post_image">
+        <ion-icon name="camera" class="upload-icon"></ion-icon>
+        <p class="upload-text">Toca la imagen</p>
+      </div>
+      <img *ngIf="post_image" [src]="post_image" alt="Post image" class="post-image" />
+    </div>
+
+    <!-- Description Field -->
+    <ion-item lines="none" class="description-item">
+      <ion-label position="floating" class="description-label">Descripción</ion-label>
+      <ion-textarea formControlName="description" class="description-textarea"></ion-textarea>
+    </ion-item>
+
+    <!-- Error Messages -->
+    <div class="error-messages">
+      <ng-container *ngFor="let error of formErrors.description">
+        <ion-text color="danger" *ngIf="addPostForm.get('description')?.hasError(error.type) && addPostForm.get('description')?.dirty">
+          {{ error.message }}
+        </ion-text>
+      </ng-container>
+    </div>
+
+    <!-- Submit Button -->
+    <ion-footer class="form-footer">
+      <ion-button
+        type="submit"
+        [disabled]="!addPostForm.valid"
+        expand="block"
+        fill="solid"
+        class="submit-button"
+      >
+        Publicar
+      </ion-button>
+    </ion-footer>
+  </form>
+</ion-content>
+

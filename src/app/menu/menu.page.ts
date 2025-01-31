@@ -1,24 +1,50 @@
-import { Component } from '@angular/core';
-import {MenuController, NavController} from "@ionic/angular";
-import {Storage} from "@ionic/storage-angular";
+import { Component, OnInit } from '@angular/core';
+import { MenuController, NavController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.page.html',
   styleUrls: ['./menu.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class MenuPage {
+export class MenuPage implements OnInit {
 
-  constructor(private menuController: MenuController, private storage : Storage, private navCtrl: NavController) { }
+  user: any = {};
 
-  async closeMenu() {
-    await this.menuController.close();
+  constructor(
+    private menu: MenuController,
+    private navCrtl: NavController,
+    private storage: Storage
+  ) {}
+
+  async ngOnInit() {
+    this.user = await this.storage.get('user');
+  }
+
+  closeMenu() {
+    this.menu.close();
   }
 
   logOut() {
-    this.storage.clear()
-    this.navCtrl.navigateForward('/login');
+    this.storage.remove('isUserLoggedIn');
+    this.navCrtl.navigateRoot('/login');
+    this.closeMenu();
   }
 
+  searchUser() {
+    this.navCrtl.navigateRoot('/menu/search-users');
+    this.closeMenu();
+  }
+
+  account() {
+    this.navCrtl.navigateRoot('/menu/account');
+    this.closeMenu();
+  }
+
+  home() {
+    this.navCrtl.navigateRoot('/menu/home');
+    this.closeMenu();
+  }
 }

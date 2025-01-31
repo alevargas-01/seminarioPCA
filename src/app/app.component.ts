@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { register } from 'swiper/element/bundle';
 import { Storage } from '@ionic/storage-angular';
 
@@ -10,10 +11,14 @@ register();
   styleUrls: ['app.component.scss'],
   standalone: false,
 })
+
 export class AppComponent {
+
   constructor(private storage: Storage) {}
 
   async ngOnInit() {
     await this.storage.create();
+    const isIntroShowed = await this.storage.get('vilaintro');
   }
+
 }

@@ -10,13 +10,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HomePageRoutingModule
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, HomePageRoutingModule],
+  declarations: [HomePage],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [HomePage]
 })
 export class HomePageModule {}

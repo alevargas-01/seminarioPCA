@@ -1,30 +1,28 @@
 <ion-content>
-  <swiper-container
-    slides-per-view="1"
-    pagination="true"
-  >
-    <swiper-slide class="bg-color-slide">
-      <h1 class="title1">Hola Slide 1</h1>
-      <img src="/assets/imagenes/template_img.jpg" alt="imagen">
-      <ion-icon name="cafe-outline"></ion-icon>
-      <p>Primer slide</p>
+  <swiper-container [slidesPerView]="'auto'" [spaceBetween]="16" [centeredSlides]="true" class="intro-swiper">
+    <swiper-slide class="slide">
+      <h1 class="title">Explora Nuevas Sensaciones</h1>
+      <p class="description">Sumérgete en una experiencia culinaria inolvidable.</p>
+      <img src="assets/img/plato.jpg" alt="Experiencia culinaria" class="image">
     </swiper-slide>
-    <swiper-slide>
-      <h1>Hola Slide 2</h1>
-      <img src="/assets/imagenes/template_img.jpg" alt="imagen">
-      <p>Segundo slide</p>
+
+    <swiper-slide class="slide">
+      <h1 class="title">Sabores de Temporada</h1>
+      <p class="description">Elige entre lo mejor de cada estación.</p>
+      <img src="assets/img/plato1jpg.jpg" alt="Sabores de temporada" class="image">
     </swiper-slide>
-    <swiper-slide>
-      <h1>Hola Slide 3</h1>
-      <img src="/assets/imagenes/template_img.jpg" alt="imagen">
-      <p>Tercer slide</p>
+
+    <swiper-slide class="slide">
+      <h1 class="title">Ingredientes Orgánicos</h1>
+      <p class="description">Calidad y frescura en cada plato.</p>
+      <img src="assets/img/plato2.jpg" alt="Ingredientes orgánicos" class="image">
     </swiper-slide>
-    <swiper-slide>
-      <ion-icon name="close" class="close-icon" (click)="finish()"></ion-icon>
-      <h1>Hola Slide 4</h1>
-      <img src="/assets/imagenes/template_img.jpg" alt="imagen">
-      <p>Cuarto slide</p>
-      <ion-button  (click)="finish()">Llevame al home</ion-button>
+
+    <swiper-slide class="slide">
+      <h1 class="title">Haz Tu Reserva</h1>
+      <p class="description">Asegura tu mesa hoy mismo.</p>
+      <img src="assets/img/plato3.jpg" alt="Reserva" class="image">
+      <ion-button class="start-button" (click)="finish()">Reservar Ahora</ion-button>
     </swiper-slide>
   </swiper-container>
 </ion-content>

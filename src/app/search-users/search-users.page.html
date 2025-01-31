@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Usuarios</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <!-- Barra de búsqueda -->
+  <ion-toolbar class="searchbar-toolbar">
+    <ion-searchbar
+      placeholder="Buscar usuarios"
+      (ionInput)="searchUser($event)"
+      color="light"
+      class="custom-searchbar">
+    </ion-searchbar>
+  </ion-toolbar>
+
+  <!-- Lista de usuarios -->
+  <ion-list lines="none" class="custom-list">
+    <ion-item *ngFor="let user of users" class="custom-item">
+      <ion-avatar slot="start" class="user-avatar">
+        <img [src]="user?.image || 'assets/img/profile.png'" alt="User Avatar">
+      </ion-avatar>
+      <ion-label>
+        <h2 class="user-name">{{ user?.name }} {{ user?.last_name }}</h2>
+        <p class="user-email">{{ user?.email }}</p>
+      </ion-label>
+      <ion-button
+        slot="end"
+        color="primary"
+        shape="round"
+        fill="outline"
+        size="small"
+        (click)="toggleFollow(user)">
+        <ion-icon
+          [name]="user.is_following ? 'heart-dislike-outline' : 'heart-outline'">
+        </ion-icon>
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

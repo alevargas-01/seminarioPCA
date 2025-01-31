@@ -3,32 +3,36 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button (click)="regresar()">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-title>Perfil</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid>
-    <ion-row class="ion-justify-content-center ion-align-items-center">
-      <ion-col size-sm="12" size-md="6">
-        <ion-card class="ion-padding">
-          <ion-card-header>
-            <ion-card-title>{{user_data.name}} {{user_data.last_name}}</ion-card-title>
-          </ion-card-header>
-          <figure (click)="tomarFoto()">
-            <img class="profile_img" [src]="user_data.image ? user_data.image : 'assets/imagenes/template_img.jpg'"/>
-          </figure>
-          <ion-card-content>
-              <p>usuario: {{user_data.username}}</p>
-              <p>Seguidores: {{user_data.followed_users.length}}</p>
-              <p>Siguiendo: {{user_data.following_users.length}}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content class="profile-page">
+  <div class="profile-container">
+    <!-- Imagen de perfil -->
+    <ion-avatar class="profile-avatar" (click)="presentPhotoOptions()">
+      <img [src]="user_data?.image ?? 'assets/img/profile.png'" alt="imagen de perfil" />
+    </ion-avatar>
+
+    <!-- Información del perfil -->
+    <p class="profile-name">{{ user_data?.name }} {{ user_data?.last_name }}</p>
+    <p class="profile-username">{{ '@' + user_data.username }}</p>
+
+    <!-- Estadísticas del perfil -->
+    <div class="profile-stats">
+      <ion-item lines="none" class="stat-item">
+        <ion-label>Seguidores:</ion-label>
+        <ion-note>{{ user_data?.followers?.length }}</ion-note>
+      </ion-item>
+      <ion-item lines="none" class="stat-item">
+        <ion-label>Siguiendo:</ion-label>
+        <ion-note>{{ user_data?.followees?.length }}</ion-note>
+      </ion-item>
+    </div>
+
+    <!-- Botón de edición -->
+    <ion-button expand="block" color="primary" class="edit-button" (click)="editAccount()">
+      Editar perfil
+    </ion-button>
+  </div>
 </ion-content>

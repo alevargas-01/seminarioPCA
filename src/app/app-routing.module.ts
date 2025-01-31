@@ -1,34 +1,45 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {AuthGuard} from "./guards/auth.guard";
+import { IntroGuard } from './guards/intro.guard';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
   {
     path: '',
     redirectTo: 'intro',
-    pathMatch: 'full'
-  },
-  {
-    path: 'menu',
-    loadChildren: () => import('./menu/menu.module').then( m => m.MenuPageModule),
-    canActivate: [AuthGuard],
+    pathMatch: 'full',
   },
   {
     path: 'intro',
-    loadChildren: () => import('./intro/intro.module').then( m => m.IntroPageModule)
+    loadChildren: () =>
+      import('./intro/intro.module').then((m) => m.IntroPageModule),
   },
   {
     path: 'login',
-    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () =>
+      import('./login/login.module').then((m) => m.LoginPageModule),
   },
   {
     path: 'register',
-    loadChildren: () => import('./register/register.module').then( m => m.RegisterPageModule)
+    loadChildren: () =>
+      import('./register/register.module').then((m) => m.RegisterPageModule),
   },
   {
-    path: 'postmodal',
-    loadChildren: () => import('./postmodal/postmodal.module').then( m => m.PostmodalPageModule)
+    path: 'menu',
+    loadChildren: () =>
+    import('./menu/menu.module').then((m) => m.MenuPageModule),
+    canActivate: [LoginGuard, IntroGuard],
   },
+  {
+    path: 'add-post-modal',
+    loadChildren: () => import('./add-post-modal/add-post-modal.module').then( m => m.AddPostModalPageModule)
+  },
+  {
+    path: 'edit-account-modal',
+    loadChildren: () => import('./edit-account-modal/edit-account-modal.module').then( m => m.EditAccountModalPageModule)
+  },
+
+
 ];
 
 @NgModule({

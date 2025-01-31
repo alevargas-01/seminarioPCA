@@ -1,0 +1,61 @@
+/* Menu Styles */
+ion-menu {
+  --background: #f4f5f8;
+}
+
+.profile-item {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  border-radius: 50%;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.username {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.user-role {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.menu-item {
+  --min-height: 50px;
+  margin: 5px 0;
+  border-radius: 10px;
+  transition: background 0.2s;
+}
+
+.menu-item:hover {
+  background: #e4e4e4;
+}
+
+/* Change icon color on hover */
+.menu-item:hover ion-icon {
+  color: #2a80e4;
+}
+
+ion-toolbar {
+  --background: #2a80e4;
+}
+
+ion-label {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Close button */
+ion-button {
+  --padding-start: 0;
+}

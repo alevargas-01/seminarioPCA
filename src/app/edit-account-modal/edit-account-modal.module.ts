@@ -4,18 +4,18 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
+import { EditAccountModalPageRoutingModule } from './edit-account-modal-routing.module';
 
-import { RegisterPage } from './register.page';
+import { EditAccountModalPage } from './edit-account-modal.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    EditAccountModalPageRoutingModule,
     ReactiveFormsModule,
-    RegisterPageRoutingModule
   ],
-  declarations: [RegisterPage]
+  declarations: [EditAccountModalPage],
 })
-export class RegisterPageModule {}
+export class EditAccountModalPageModule {}

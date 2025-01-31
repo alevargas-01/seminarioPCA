@@ -1,93 +1,89 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthService} from "../services/auth.service";
-import {NavController} from "@ionic/angular";
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { NavController } from '@ionic/angular';
+
+
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
-  standalone: false
+  standalone: false,
 })
-export class RegisterPage{
-
+export class RegisterPage implements OnInit {
   registerForm: FormGroup;
+  errorMessage: any;
+
   formErrors = {
-    nombre: [
-      { type: 'required', message: 'El nombre es obligatorio' },
-    ],
-    apellido: [
-      { type: 'required', message: 'El apellido es obligatorio' },
-    ],
+    user: [{ type: 'required', message: 'El usuario es obligatorio' }],
+    name: [{ type: 'required', message: 'El nombre es obligatorio' }],
+    lastname: [{ type: 'required', message: 'El apellido es obligatorio' }],
     email: [
       { type: 'required', message: 'El correo es obligatorio' },
-      { type: 'email', message: 'El correo no es valido' }
-    ],
-    username: [
-      { type: 'required', message: 'El nombre de usuario es obligatorio' }
+      { type: 'email', message: 'El correo no es valido' },
     ],
     password: [
       { type: 'required', message: 'La contraseña es obligatoria' },
-      { type: 'minlength', message: 'La contraseña debe ser minimo de 6 caracteres' }
+      {
+        type: 'minlength',
+        message: 'La contraseña debe tener al menos 6 caracteres',
+      },
     ],
-    passwordConfirm: [
-      { type: 'required', message: 'La contraseña es obligatoria' },
-      { type: 'passwordMismatch', message: 'Las contraseñas no coinciden' }
-    ]
+    passwordConfirmation: [
+      {
+        type: 'required',
+        message: 'La confirmación de la contraseña es obligatoria',
+      },
+      {
+        type: 'minlength',
+        message:
+          'La confirmación de la contraseña debe tener al menos 6 caracteres',
+      },
+    ],
   };
-  errorMessage: any;
 
   constructor(
-    private fb: FormBuilder,
+    private formBuilder: FormBuilder,
     private authService: AuthService,
-    private navCtrl : NavController
+    private navCtrl: NavController
   ) {
-    this.registerForm = this.fb.group({
-      name: new FormControl('', Validators.compose([Validators.required])),
-      last_name: new FormControl('', Validators.compose([Validators.required])),
-      username: new FormControl('', Validators.compose([Validators.required])),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.email
-      ])),
-      password: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(6)
-      ])),
-      confirmPassword: new FormControl('', Validators.compose([
-        Validators.required
-      ]))
-    })
-
-    this.registerForm.valueChanges.subscribe(() => {
-      this.validarCoincidenciaPass();
-    })
-  }
-
-  registerUser(registerData: any){
-    this.authService.register(registerData).then(res => {
-      console.log(res);
-      this.errorMessage = '';
-      this.navCtrl.navigateForward('/login');
-    }).catch(err => {
-      console.log(err);
-      this.errorMessage = err;
+    this.registerForm = this.formBuilder.group({
+      user: ['', [Validators.required]],
+      name: ['', [Validators.required]],
+      lastname: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      passwordConfirmation: [
+        '',
+        [Validators.required, Validators.minLength(6)],
+      ],
     });
   }
 
-  regresar() {
-    this.navCtrl.navigateForward('/login');
+  ngOnInit() {}
+
+  registerUser(credentials: any) {
+
+    this.authService
+      .register(credentials)
+      .then((response) => {
+        console.log(response);
+        this.errorMessage = '';
+        this.navCtrl.navigateForward('/login');
+      })
+      .catch((error) => {
+        console.log(error, ' error');
+        this.errorMessage = error;
+      });
   }
 
-  validarCoincidenciaPass(){
-    const pass = this.registerForm.get('password');
-    const confirmPass = this.registerForm.get('confirmPassword');
-
-    if(pass?.value !== confirmPass?.value){
-      this.registerForm.get('confirmPassword')?.setErrors({passwordMismatch : true})
-    }else{
-      this.registerForm.get('confirmPassword')?.setErrors(null)
-    }
-
+  resetLogin(){
+    this.navCtrl.navigateForward('/login');
   }
 }

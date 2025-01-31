@@ -1,22 +1,24 @@
-import {CanActivate, Router} from '@angular/router';
-import {Injectable} from "@angular/core";
-import {Storage} from "@ionic/storage-angular";
+import { Injectable } from '@angular/core';
+import { CanActivate, Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class IntroGuard implements CanActivate {
 
-  constructor(private storage: Storage, private route : Router) {
-  }
+  constructor(private storage: Storage, private router: Router) { }
 
   async canActivate() {
-    const intro = await this.storage.get('viLaIntro');
-    if(intro){
-      return true;
-    }else{
-      await this.route.navigateByUrl('/intro');
-      return false;
+    const isIntroShowed = (await this.storage.get('vilaintro')) ?? false;
+
+    if (!isIntroShowed) {
+      await this.router.navigateByUrl('/intro');
     }
+
+    return isIntroShowed;
+    
   }
+
 }

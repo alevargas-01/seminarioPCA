@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { PostmodalPage } from './postmodal.page';
+import { AddPostModalPage } from './add-post-modal.page';
 
-describe('PostmodalPage', () => {
-  let component: PostmodalPage;
-  let fixture: ComponentFixture<PostmodalPage>;
+describe('AddPostModalPage', () => {
+  let component: AddPostModalPage;
+  let fixture: ComponentFixture<AddPostModalPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PostmodalPage);
+    fixture = TestBed.createComponent(AddPostModalPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
